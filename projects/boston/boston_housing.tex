@@ -1,0 +1,917 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass{article}
+
+    
+    
+    \usepackage{graphicx} % Used to insert images
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{color} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage{ulem} % ulem is needed to support strikethroughs (\sout)
+    
+
+    
+    
+    \definecolor{orange}{cmyk}{0,0.4,0.8,0.2}
+    \definecolor{darkorange}{rgb}{.71,0.21,0.01}
+    \definecolor{darkgreen}{rgb}{.12,.54,.11}
+    \definecolor{myteal}{rgb}{.26, .44, .56}
+    \definecolor{gray}{gray}{0.45}
+    \definecolor{lightgray}{gray}{.95}
+    \definecolor{mediumgray}{gray}{.8}
+    \definecolor{inputbackground}{rgb}{.95, .95, .85}
+    \definecolor{outputbackground}{rgb}{.95, .95, .95}
+    \definecolor{traceback}{rgb}{1, .95, .95}
+    % ansi colors
+    \definecolor{red}{rgb}{.6,0,0}
+    \definecolor{green}{rgb}{0,.65,0}
+    \definecolor{brown}{rgb}{0.6,0.6,0}
+    \definecolor{blue}{rgb}{0,.145,.698}
+    \definecolor{purple}{rgb}{.698,.145,.698}
+    \definecolor{cyan}{rgb}{0,.698,.698}
+    \definecolor{lightgray}{gray}{0.5}
+    
+    % bright ansi colors
+    \definecolor{darkgray}{gray}{0.25}
+    \definecolor{lightred}{rgb}{1.0,0.39,0.28}
+    \definecolor{lightgreen}{rgb}{0.48,0.99,0.0}
+    \definecolor{lightblue}{rgb}{0.53,0.81,0.92}
+    \definecolor{lightpurple}{rgb}{0.87,0.63,0.87}
+    \definecolor{lightcyan}{rgb}{0.5,1.0,0.83}
+    
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{boston\_housing}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=blue,
+      linkcolor=darkorange,
+      citecolor=darkgreen,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Machine Learning Engineer
+Nanodegree}\label{machine-learning-engineer-nanodegree}
+
+\subsection{Model Evaluation \&
+Validation}\label{model-evaluation-validation}
+
+\subsection{Project: Predicting Boston Housing
+Prices}\label{project-predicting-boston-housing-prices}
+
+A description of the dataset can be found
+\href{https://archive.ics.uci.edu/ml/datasets/Housing}{here}, which is
+provided by the \textbf{UCI Machine Learning Repository}.
+
+    \section{Getting Started}\label{getting-started}
+
+The Boston housing market is highly competitive, and there is a desire
+to be the best real estate agent in the area. To compete with peers, I
+decided to leverage a few basic machine learning concepts to assist
+myself and a client with finding the best selling price for their home.
+I've come across the Boston Housing dataset which contains aggregated
+data on various features for houses in Greater Boston communities,
+including the median value of homes for each of those areas. I will
+build an optimal model based on a statistical analysis with the tools
+available. This model will then used to estimate the best selling price
+for my client's home.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} Importing a few necessary libraries}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{pl}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k+kn}{import} \PY{n}{datasets}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn.tree} \PY{k+kn}{import} \PY{n}{DecisionTreeRegressor}
+        
+        \PY{c+c1}{\PYZsh{} Make matplotlib show our plots inline (nicely formatted in the notebook)}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        
+        \PY{c+c1}{\PYZsh{} Create our client\PYZsq{}s feature set for which we will be predicting a selling price}
+        \PY{n}{CLIENT\PYZus{}FEATURES} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+m+mf}{11.95}\PY{p}{,} \PY{l+m+mf}{0.00}\PY{p}{,} \PY{l+m+mf}{18.100}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mf}{0.6590}\PY{p}{,} \PY{l+m+mf}{5.6090}\PY{p}{,} \PY{l+m+mf}{90.00}\PY{p}{,} \PY{l+m+mf}{1.385}\PY{p}{,} \PY{l+m+mi}{24}\PY{p}{,} \PY{l+m+mf}{680.0}\PY{p}{,} \PY{l+m+mf}{20.20}\PY{p}{,} \PY{l+m+mf}{332.09}\PY{p}{,} \PY{l+m+mf}{12.13}\PY{p}{]}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Load the Boston Housing dataset into the city\PYZus{}data variable}
+        \PY{n}{city\PYZus{}data} \PY{o}{=} \PY{n}{datasets}\PY{o}{.}\PY{n}{load\PYZus{}boston}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Initialize the housing prices and housing features}
+        \PY{n}{housing\PYZus{}prices} \PY{o}{=} \PY{n}{city\PYZus{}data}\PY{o}{.}\PY{n}{target}
+        \PY{n}{housing\PYZus{}features} \PY{o}{=} \PY{n}{city\PYZus{}data}\PY{o}{.}\PY{n}{data}
+        
+        \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Boston Housing dataset loaded successfully!}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Boston Housing dataset loaded successfully!
+    \end{Verbatim}
+
+    \section{Statistical Analysis and Data
+Exploration}\label{statistical-analysis-and-data-exploration}
+
+In this first section of the project, I will quickly investigate a few
+basic statistics about the dataset you are working with. In addition,
+I'll look at the client's feature set in \texttt{CLIENT\_FEATURES} and
+see how this particular sample relates to the features of the dataset.
+Familiarizing myself with the data through an explorative process is a
+fundamental practice to help better understand my results.
+
+    \subsection{Step 1}\label{step-1}
+
+In the code block below, I will the imported \texttt{numpy} library to
+calculate the desired statistics.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} Number of houses in the dataset}
+        \PY{n}{total\PYZus{}houses} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{shape}\PY{p}{(}\PY{n}{housing\PYZus{}features}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Number of features in the dataset}
+        \PY{n}{total\PYZus{}features} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{shape}\PY{p}{(}\PY{n}{housing\PYZus{}features}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Minimum housing value in the dataset}
+        \PY{n}{minimum\PYZus{}price} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{n}{housing\PYZus{}prices}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Maximum housing value in the dataset}
+        \PY{n}{maximum\PYZus{}price} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{housing\PYZus{}prices}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Mean house value of the dataset}
+        \PY{n}{mean\PYZus{}price} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{housing\PYZus{}prices}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Median house value of the dataset}
+        \PY{n}{median\PYZus{}price} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{median}\PY{p}{(}\PY{n}{housing\PYZus{}prices}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Standard deviation of housing values of the dataset}
+        \PY{n}{std\PYZus{}dev} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{housing\PYZus{}prices}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Show the calculated statistics}
+        \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Boston Housing dataset statistics (in \PYZdl{}1000}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s):}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}
+        \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total number of houses:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{total\PYZus{}houses}
+        \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total number of features:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{total\PYZus{}features}
+        \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Minimum house price:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{minimum\PYZus{}price}
+        \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Maximum house price:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{maximum\PYZus{}price}
+        \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Mean house price: \PYZob{}0:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{mean\PYZus{}price}\PY{p}{)}
+        \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Median house price:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{median\PYZus{}price}
+        \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Standard deviation of house price: \PYZob{}0:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{std\PYZus{}dev}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Boston Housing dataset statistics (in \$1000's):
+
+Total number of houses: 506
+Total number of features: 13
+Minimum house price: 5.0
+Maximum house price: 50.0
+Mean house price: 22.533
+Median house price: 21.2
+Standard deviation of house price: 9.188
+    \end{Verbatim}
+
+    \subsection{Question 1}\label{question-1}
+
+As a reminder, you can view a description of the Boston Housing dataset
+\href{https://archive.ics.uci.edu/ml/datasets/Housing}{here}, where you
+can find the different features under \textbf{Attribute Information}.
+The \texttt{MEDV} attribute relates to the values stored in our
+\texttt{housing\_prices} variable, so we do not consider that a feature
+of the data.
+
+\emph{Of the features available for each data point, I will choose three
+that I feel are significant and give a brief description for each of
+what they measure.}
+
+    \textbf{Answer: } Out of the features available for each data point as
+listed on the UCI Machine Learning Respository site for the housing
+dataset, there are three that I believe are significant features of the
+housing value:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{CRIM}: per capita crime rate by town I believe that this is an
+  important feature, since it could significantly impact the pricing of
+  a house. Areas in which crime is high are unfavorable, and houses
+  would be priced lower since demand is low. On the other hand, areas in
+  which crime is low are favored, and houses would be priced higher
+  since demand is high. This is related to the safety of living in the
+  house, which is an important factor to prospective buyers.
+\item
+  \textbf{LSTAT}: \% lower status of the population I believe that this
+  is a significant feature, since it could also significantly impact the
+  pricing of a house. In areas with a large proportion of low-status
+  individuals, housing may be cheaper so as to afford a place to live.
+  For example, rural areas will have cheap housing to accomodate for the
+  demographic, and since richer individuals would not want to live in
+  those areas. On the other hand, areas with highly affluent individuals
+  would have higher-priced housing since these areas may be more
+  developed with better amenities.
+\item
+  \textbf{NOX}: nitric oxides concentration (parts per 10 million)
+  Finally, I believe that NOX concentration is important in predicting
+  the housing value. This is because the compound is dangerous if
+  inhaled in large quantities, and areas with high concentrations would
+  be generally avoided. This particular feature is interesting since it
+  may only be considered when values are high: individuals may not
+  consciously choose areas based on low values, but rather avoid areas
+  based on high values. Nevertheless, the concentration will have an
+  impact on the housing price.
+\end{enumerate}
+
+All of the features I chose seem to be universal, as opposed to some
+other features such as pupil-teacher ratio (PTRATIO) or proportion of
+non-retail business acres per town (INDUS) which may be explanatory for
+some kinds of individuals, but not others.
+
+    \subsection{Question 2}\label{question-2}
+
+\emph{Using the client's feature set \texttt{CLIENT\_FEATURES}, which
+values correspond with the features chosen above?}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k}{print} \PY{n}{CLIENT\PYZus{}FEATURES}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[11.95, 0.0, 18.1, 0, 0.659, 5.609, 90.0, 1.385, 24, 680.0, 20.2, 332.09, 12.13]]
+    \end{Verbatim}
+
+    \textbf{Answer: } The client's feature set shows that their house is in
+an area with \textbf{11.95\%} crime, \textbf{0.659} parts per million
+nitrous oxide, and \textbf{12.13\%} of the population in the
+lower-class.
+
+    \section{Evaluating Model
+Performance}\label{evaluating-model-performance}
+
+In this second section of the project, I will begin to develop the tools
+necessary for a model to make a prediction. Being able to accurately
+evaluate each model's performance through the use of these tools helps
+to greatly reinforce the confidence in predictions.
+
+    \subsection{Step 2}\label{step-2}
+
+In the code block below, the \texttt{shuffle\_split\_data} function does
+the following: - Randomly shuffle the input data \texttt{X} and target
+labels (housing values) \texttt{y}. - Split the data into training and
+testing subsets, holding 30\% of the data for testing.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} Put any import statements you need for this code block here}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k+kn}{import} \PY{n}{cross\PYZus{}validation}
+        \PY{k+kn}{import} \PY{n+nn}{random}
+        
+        \PY{k}{def} \PY{n+nf}{shuffle\PYZus{}split\PYZus{}data}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{} Shuffles and splits data into 70\PYZpc{} training and 30\PYZpc{} testing subsets,}
+        \PY{l+s+sd}{        then returns the training and testing subsets. \PYZdq{}\PYZdq{}\PYZdq{}}
+        
+            \PY{c+c1}{\PYZsh{} Shuffle and split the data}
+            \PY{n}{c} \PY{o}{=} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+            \PY{n}{random}\PY{o}{.}\PY{n}{shuffle}\PY{p}{(}\PY{n}{c}\PY{p}{)}
+            \PY{n}{X} \PY{o}{=} \PY{p}{[}\PY{n}{e}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{k}{for} \PY{n}{e} \PY{o+ow}{in} \PY{n}{c}\PY{p}{]}
+            \PY{n}{y} \PY{o}{=} \PY{p}{[}\PY{n}{e}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{k}{for} \PY{n}{e} \PY{o+ow}{in} \PY{n}{c}\PY{p}{]}
+            
+            \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{cross\PYZus{}validation}\PY{o}{.}\PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} Return the training and testing data subsets}
+            \PY{k}{return} \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}
+        
+        
+        \PY{c+c1}{\PYZsh{} Test shuffle\PYZus{}split\PYZus{}data}
+        \PY{k}{try}\PY{p}{:}
+            \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{shuffle\PYZus{}split\PYZus{}data}\PY{p}{(}\PY{n}{housing\PYZus{}features}\PY{p}{,} \PY{n}{housing\PYZus{}prices}\PY{p}{)}
+            \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Successfully shuffled and split the data!}\PY{l+s+s2}{\PYZdq{}}
+        \PY{k}{except}\PY{p}{:}
+            \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Something went wrong with shuffling and splitting the data.}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Successfully shuffled and split the data!
+    \end{Verbatim}
+
+    \subsection{Question 3}\label{question-3}
+
+\emph{Why do we split the data into training and testing subsets for our
+model?}
+
+    \textbf{Answer: } We split the data into training and testing subsets
+for our model to properly assess whether or not our model can go out
+into the real world and predict new data. If we only used testing data,
+we would have no data to train, so this wouldn't even allow us to build
+a model. If we only used training data, we would build a model that runs
+the risk of only being accurate for that set of data and not being able
+to accurately predict other data points. In other words, interpolation
+and extrapolation would not be possible. We therefore use the split to
+both develop our model and evaluate or validate its accuracy.
+
+    \subsection{Step 3}\label{step-3}
+
+In the code block below, the \texttt{performance\_metric} function does
+the following: - Perform a total error calculation between the true
+values of the \texttt{y} labels \texttt{y\_true} and the predicted
+values of the \texttt{y} labels \texttt{y\_predict}.
+
+I will first choose an appropriate performance metric for this problem.
+See
+\href{http://scikit-learn.org/stable/modules/classes.html\#sklearn-metrics-metrics}{the
+sklearn metrics documentation} to view a list of available metric
+functions.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} Put any import statements you need for this code block here}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn.metrics} \PY{k+kn}{import} \PY{n}{mean\PYZus{}squared\PYZus{}error}
+        
+        \PY{k}{def} \PY{n+nf}{performance\PYZus{}metric}\PY{p}{(}\PY{n}{y\PYZus{}true}\PY{p}{,} \PY{n}{y\PYZus{}predict}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{} Calculates and returns the total error between true and predicted values}
+        \PY{l+s+sd}{        based on a performance metric chosen by the student. \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{n}{error} \PY{o}{=} \PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{y\PYZus{}true}\PY{p}{,} \PY{n}{y\PYZus{}predict}\PY{p}{)}
+            \PY{k}{return} \PY{n}{error}
+        
+        
+        \PY{c+c1}{\PYZsh{} Test performance\PYZus{}metric}
+        \PY{k}{try}\PY{p}{:}
+            \PY{n}{total\PYZus{}error} \PY{o}{=} \PY{n}{performance\PYZus{}metric}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+            \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Successfully performed a metric calculation!}\PY{l+s+s2}{\PYZdq{}}
+        \PY{k}{except}\PY{p}{:}
+            \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Something went wrong with performing a metric calculation.}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Successfully performed a metric calculation!
+    \end{Verbatim}
+
+    \subsection{Question 4}\label{question-4}
+
+\emph{Which performance metric was most appropriate for predicting
+housing prices and analyzing the total error. Why?} - \emph{Accuracy} -
+\emph{Precision} - \emph{Recall} - \emph{F1 Score} - \emph{Mean Squared
+Error (MSE)} - \emph{Mean Absolute Error (MAE)}
+
+    \textbf{Answer: } I found that the MSE would be the most appropriate
+performance metric for predicting housing prices and analyzing the total
+error. I first short-listed either the MSE or the MAE as being
+appropriate, since the data being dealt with is quantitative and not
+categorical. Then, I noted that the mean squared error provides a better
+indication of accuracy measurement since errors are all positive, and
+larger errors are exaggerated more due to the squaring. This is also a
+common metric used when judging regressions, and so I believed it would
+apply well to this study.
+
+    \subsection{Step 4 (Final Step)}\label{step-4-final-step}
+
+In the code block below, the \texttt{fit\_model} function does the
+following: - Create a scoring function using the same performance metric
+as in \textbf{Step 2}. See the
+\href{http://scikit-learn.org/stable/modules/generated/sklearn.metrics.make_scorer.html}{sklearn
+\texttt{make\_scorer} documentation}. - Build a GridSearchCV object
+using \texttt{regressor}, \texttt{parameters}, and
+\texttt{scoring\_function}. See the
+\href{http://scikit-learn.org/stable/modules/generated/sklearn.grid_search.GridSearchCV.html}{sklearn
+documentation on GridSearchCV}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} Put any import statements you need for this code block}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn.metrics} \PY{k+kn}{import} \PY{n}{make\PYZus{}scorer}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn.grid\PYZus{}search} \PY{k+kn}{import} \PY{n}{GridSearchCV}
+        
+        \PY{k}{def} \PY{n+nf}{fit\PYZus{}model}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{} Tunes a decision tree regressor model using GridSearchCV on the input data X }
+        \PY{l+s+sd}{        and target labels y and returns this optimal model. \PYZdq{}\PYZdq{}\PYZdq{}}
+        
+            \PY{c+c1}{\PYZsh{} Create a decision tree regressor object}
+            \PY{n}{regressor} \PY{o}{=} \PY{n}{DecisionTreeRegressor}\PY{p}{(}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Set up the parameters we wish to tune}
+            \PY{n}{parameters} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{max\PYZus{}depth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{\PYZcb{}}
+        
+            \PY{c+c1}{\PYZsh{} Make an appropriate scoring function}
+            \PY{n}{scoring\PYZus{}function} \PY{o}{=} \PY{n}{make\PYZus{}scorer}\PY{p}{(}\PY{n}{performance\PYZus{}metric}\PY{p}{,} \PY{n}{greater\PYZus{}is\PYZus{}better} \PY{o}{=} \PY{n+nb+bp}{False}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Make the GridSearchCV object}
+            \PY{n}{reg} \PY{o}{=} \PY{n}{GridSearchCV}\PY{p}{(}\PY{n}{regressor}\PY{p}{,} \PY{n}{parameters}\PY{p}{,} \PY{n}{scoring} \PY{o}{=} \PY{n}{scoring\PYZus{}function}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Fit the learner to the data to obtain the optimal model with tuned parameters}
+            \PY{n}{reg}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Return the optimal model}
+            \PY{k}{return} \PY{n}{reg}\PY{o}{.}\PY{n}{best\PYZus{}estimator\PYZus{}}
+        
+        
+        \PY{c+c1}{\PYZsh{} Test fit\PYZus{}model on entire dataset}
+        \PY{k}{try}\PY{p}{:}
+            \PY{n}{reg} \PY{o}{=} \PY{n}{fit\PYZus{}model}\PY{p}{(}\PY{n}{housing\PYZus{}features}\PY{p}{,} \PY{n}{housing\PYZus{}prices}\PY{p}{)}
+            \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Successfully fit a model!}\PY{l+s+s2}{\PYZdq{}}
+        \PY{k}{except}\PY{p}{:}
+            \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Something went wrong with fitting a model.}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Successfully fit a model!
+    \end{Verbatim}
+
+    \subsection{Question 5}\label{question-5}
+
+\emph{What is the grid search algorithm and when is it applicable?}
+
+    \textbf{Answer: } The grid search algorithm finds the optimized
+parameters to use in the estimator. It does this by iterating through
+all possible combinations of provided parameters (a parameter grid) in
+order to determine the combination yielding the best estimator. It is
+applicable in cases when the model has many parameters to consider, and
+when manual tuning is inefficient or expensive.
+
+    \subsection{Question 6}\label{question-6}
+
+\emph{What is cross-validation, and how is it performed on a model? Why
+would cross-validation be helpful when using grid search?}
+
+    \textbf{Answer: } Cross-validation is a process through which data split
+for testing and training purposes. This is done to maximize the
+certainty of our validity claims, and to prevent against overfitting.
+One kind of cross-validation technique is \texttt{k}-fold CV, in which
+we use as much data as possible to both train and test our model. It is
+performed using an algorithm in which data is divided into \texttt{k}
+equally-sized bins. The data is then analyzed where \texttt{1} bin is
+used as the testing data and the other \texttt{k-1} bins are used as
+training data. This is done \texttt{k} times, such that all data is used
+for training and testing purposes. It is helpful when using grid search
+to look at all possible models (parameters) and determine its validity
+on test data. This helps gauge which model will best predict real data,
+not just which model has the least error which can often result in
+overfitting.
+
+    \section{Learning Curves and Model
+Complexity}\label{learning-curves-and-model-complexity}
+
+We will now calculate the performance of several models and learn about
+their efficacy using visual representations. These graphs are of
+learning curves and model complexity, which lend insight towards
+relative strengths of models.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{def} \PY{n+nf}{learning\PYZus{}curves}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{} Calculates the performance of several models with varying sizes of training data.}
+        \PY{l+s+sd}{        The learning and testing error rates for each model are then plotted. \PYZdq{}\PYZdq{}\PYZdq{}}
+            
+            \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Creating learning curve graphs for max\PYZus{}depths of 1, 3, 6, and 10. . .}\PY{l+s+s2}{\PYZdq{}}
+            
+            \PY{c+c1}{\PYZsh{} Create the figure window}
+            \PY{n}{fig} \PY{o}{=} \PY{n}{pl}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} We will vary the training set size so that we have 50 different sizes}
+            \PY{n}{sizes} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{rint}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+            \PY{n}{train\PYZus{}err} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{sizes}\PY{p}{)}\PY{p}{)}
+            \PY{n}{test\PYZus{}err} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{sizes}\PY{p}{)}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Create four different models based on max\PYZus{}depth}
+            \PY{k}{for} \PY{n}{k}\PY{p}{,} \PY{n}{depth} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                
+                \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{s} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{sizes}\PY{p}{)}\PY{p}{:}
+                    
+                    \PY{c+c1}{\PYZsh{} Setup a decision tree regressor so that it learns a tree with max\PYZus{}depth = depth}
+                    \PY{n}{regressor} \PY{o}{=} \PY{n}{DecisionTreeRegressor}\PY{p}{(}\PY{n}{max\PYZus{}depth} \PY{o}{=} \PY{n}{depth}\PY{p}{)}
+                    
+                    \PY{c+c1}{\PYZsh{} Fit the learner to the training data}
+                    \PY{n}{regressor}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{[}\PY{p}{:}\PY{n}{s}\PY{p}{]}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{[}\PY{p}{:}\PY{n}{s}\PY{p}{]}\PY{p}{)}
+        
+                    \PY{c+c1}{\PYZsh{} Find the performance on the training set}
+                    \PY{n}{train\PYZus{}err}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{performance\PYZus{}metric}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{[}\PY{p}{:}\PY{n}{s}\PY{p}{]}\PY{p}{,} \PY{n}{regressor}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{[}\PY{p}{:}\PY{n}{s}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                    
+                    \PY{c+c1}{\PYZsh{} Find the performance on the testing set}
+                    \PY{n}{test\PYZus{}err}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{performance\PYZus{}metric}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{regressor}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}\PY{p}{)}
+        
+                \PY{c+c1}{\PYZsh{} Subplot the learning curve graph}
+                \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{k}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+                \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{sizes}\PY{p}{,} \PY{n}{test\PYZus{}err}\PY{p}{,} \PY{n}{lw} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Testing Error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{sizes}\PY{p}{,} \PY{n}{train\PYZus{}err}\PY{p}{,} \PY{n}{lw} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Training Error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n}{ax}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+                \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{max\PYZus{}depth = }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{\PYZsq{}}\PY{o}{\PYZpc{}}\PY{p}{(}\PY{n}{depth}\PY{p}{)}\PY{p}{)}
+                \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of Data Points in Training Set}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Total Error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} Visual aesthetics}
+            \PY{n}{fig}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Decision Tree Regressor Learning Performances}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+m+mf}{1.03}\PY{p}{)}
+            \PY{n}{fig}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+            \PY{n}{fig}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{k}{def} \PY{n+nf}{model\PYZus{}complexity}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{} Calculates the performance of the model as model complexity increases.}
+         \PY{l+s+sd}{        The learning and testing errors rates are then plotted. \PYZdq{}\PYZdq{}\PYZdq{}}
+             
+             \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Creating a model complexity graph. . . }\PY{l+s+s2}{\PYZdq{}}
+         
+             \PY{c+c1}{\PYZsh{} We will vary the max\PYZus{}depth of a decision tree model from 1 to 14}
+             \PY{n}{max\PYZus{}depth} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{14}\PY{p}{)}
+             \PY{n}{train\PYZus{}err} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{max\PYZus{}depth}\PY{p}{)}\PY{p}{)}
+             \PY{n}{test\PYZus{}err} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{max\PYZus{}depth}\PY{p}{)}\PY{p}{)}
+         
+             \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{d} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{max\PYZus{}depth}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} Setup a Decision Tree Regressor so that it learns a tree with depth d}
+                 \PY{n}{regressor} \PY{o}{=} \PY{n}{DecisionTreeRegressor}\PY{p}{(}\PY{n}{max\PYZus{}depth} \PY{o}{=} \PY{n}{d}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} Fit the learner to the training data}
+                 \PY{n}{regressor}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} Find the performance on the training set}
+                 \PY{n}{train\PYZus{}err}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{performance\PYZus{}metric}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{regressor}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} Find the performance on the testing set}
+                 \PY{n}{test\PYZus{}err}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{performance\PYZus{}metric}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{regressor}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Plot the model complexity graph}
+             \PY{n}{pl}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+             \PY{n}{pl}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Decision Tree Regressor Complexity Performance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{pl}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{max\PYZus{}depth}\PY{p}{,} \PY{n}{test\PYZus{}err}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Testing Error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{pl}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{max\PYZus{}depth}\PY{p}{,} \PY{n}{train\PYZus{}err}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Training Error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{pl}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+             \PY{n}{pl}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Maximum Depth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{pl}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Total Error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{pl}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \section{Analyzing Model Performance}\label{analyzing-model-performance}
+
+In this third section of the project, we'll take a look at several
+models' learning and testing error rates on various subsets of training
+data. Additionally, we'll investigate one particular algorithm with an
+increasing \texttt{max\_depth} parameter on the full training set to
+observe how model complexity affects learning and testing errors.
+Graphing the model's performance based on varying criteria can be
+beneficial in the analysis process, such as visualizing behavior that
+may not have been apparent from the results alone.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k+kn}{as} \PY{n+nn}{sns}
+        
+        \PY{n}{learning\PYZus{}curves}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Creating learning curve graphs for max\_depths of 1, 3, 6, and 10. . .
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{boston_housing_files/boston_housing_30_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Question 7}\label{question-7}
+
+\emph{Choose one of the learning curve graphs that are created above.
+What is the max depth for the chosen model? As the size of the training
+set increases, what happens to the training error? What happens to the
+testing error?}
+
+    \textbf{Answer: } The max depth for the chosen model is 1. As the size
+of this training set increases, the training error initially increases
+quite quickly and eventually plateaus. On the other hand, the testing
+error initially decreases and eventually plateaus. Both errors stabilize
+at quite high values (\textasciitilde{}60 for testing and
+\textasciitilde{}40 for training).
+
+    \subsection{Question 8}\label{question-8}
+
+\emph{Look at the learning curve graphs for the model with a max depth
+of 1 and a max depth of 10. When the model is using the full training
+set, does it suffer from high bias or high variance when the max depth
+is 1? What about when the max depth is 10?}
+
+    \textbf{Answer: } When the max depth is 1, the model seems to suffer
+from high bias. This is because as more data points are added to the
+training set, there is no difference in the prediction error, suggesting
+that underfitting has occurred. The model is oversimplified, and cannot
+accurately predict further complexity in the data after a certain point.
+On the other hand, when the max depth is 10, the model seems to suffer
+from high variance. This is because the training error is almost 0 for
+the entire training set, whereas there is still a gap between the
+training and test error curves. This suggests that the model is able to
+almost perfectly predict the training data but has trouble with real
+test data. The model is overcomplicated, and overfitting has occurred
+which minimizes training error but causes large test error.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{n}{model\PYZus{}complexity}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Creating a model complexity graph. . .
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{boston_housing_files/boston_housing_35_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Question 9}\label{question-9}
+
+\emph{From the model complexity graph above, describe the training and
+testing errors as the max depth increases. Based on the interpretation
+of the graph, which max depth results in a model that best generalizes
+the dataset? Why?}
+
+    \textbf{Answer: } As the max depth increases, the training error
+approaches zero. This makes sense, since the training error is a
+function of the depth, and as more parameters are considered, the
+training data can be fit more accurately. On the other hand, the test
+error initially decreases quickly but eventually begins to taper and
+decreases less dramatically. This makes sense, since after a certain
+point the addition of certain parameters will not greatly help the
+model, and in some cases it can harm the model.
+
+It appears that a depth of 7 best generalizes the dataset. This is
+because the testing error seems to be very low at this depth, indicating
+that the trained model is able to best generalize test data at this
+depth, preventing against the dangers of underfitting. Further, this
+depth is not too large, preventing against the dangers of overfitting.
+
+    \section{Model Prediction}\label{model-prediction}
+
+In this final section of the project, I will make a prediction on the
+client's feature set using an optimized model from \texttt{fit\_model}.
+When applying grid search along with cross-validation to optimize the
+model, it would typically be performed and validated on a training set
+and subsequently evaluated on a \textbf{dedicated test set}. In this
+project, the optimization below is performed on the \emph{entire
+dataset} (as opposed to the training set you made above) due to the many
+outliers in the data. Using the entire dataset for training provides for
+a less volatile prediction at the expense of not testing your model's
+performance.
+
+    \subsection{Question 10}\label{question-10}
+
+\emph{Using grid search on the entire dataset, what is the optimal
+\texttt{max\_depth} parameter for the model? How does this result
+compare to the intial intuition?}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Final model has an optimal max\PYZus{}depth parameter of}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{reg}\PY{o}{.}\PY{n}{get\PYZus{}params}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{max\PYZus{}depth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Final model has an optimal max\_depth parameter of 7
+    \end{Verbatim}
+
+    \textbf{Answer: } The final model has an optimal max depth of 4. This
+result is lower than my initial intuition, although the reasoning seems
+sound. Looking at the model complexity graph, the error at a depth of 4
+is still low, comparable to that of higher depths. Further, 4 is a low
+enough depth such that additional parameters are not unnecessarily
+added. A depth of 4 therefore prevents against both underfitting and
+overfitting.
+
+    \subsection{Question 11}\label{question-11}
+
+\emph{With the parameter-tuned model, what is the best selling price for
+the client's home? How does this selling price compare to the basic
+statistics calculated on the dataset?}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{n}{sale\PYZus{}price} \PY{o}{=} \PY{n}{reg}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{CLIENT\PYZus{}FEATURES}\PY{p}{)}
+         \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Predicted value of client}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s home: \PYZob{}0:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{sale\PYZus{}price}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Predicted value of client's home: 21.630
+    \end{Verbatim}
+
+    \textbf{Answer: } The predicted best selling price for the client's home
+is \$21,630. This value is slightly lower than the mean house price and
+slightly greater than the median house price. This suggests that the
+model is fairly accurate in generalizing data, and does not produce
+outlandish or strange data.
+
+    \subsection{Question 12 (Final
+Question):}\label{question-12-final-question}
+
+\emph{In a few sentences, discuss whether this model would be used or
+not to predict the selling price of future clients' homes in the Greater
+Boston area.}
+
+    \textbf{Answer: } I would use this model to predict the selling price of
+future clients' homes in the Greater Boston area. This is because with a
+depth of 4, the total error for the test data is fairly low,
+approximately 25. This depth also protects against high bias and high
+variance (underfitting and overfitting). The model was also optimized
+using cross-validation and grid search algorithms to find the best
+parameters for estimation. The number of data points was also sizeable,
+and when tested on a new client, the predicted value was in an
+acceptable range. The model serves as a good initial guess as to the
+selling price of future clients' homes using a variety of significant
+features to make its decision.
+
+    \section{\texorpdfstring{\textbf{References}}{References}}\label{references}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  http://www.leadnovo.com/165101996.htm
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} 
+\end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

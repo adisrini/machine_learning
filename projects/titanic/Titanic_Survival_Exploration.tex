@@ -1,0 +1,694 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass{article}
+
+    
+    
+    \usepackage{graphicx} % Used to insert images
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{color} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage{ulem} % ulem is needed to support strikethroughs (\sout)
+    
+
+    
+    
+    \definecolor{orange}{cmyk}{0,0.4,0.8,0.2}
+    \definecolor{darkorange}{rgb}{.71,0.21,0.01}
+    \definecolor{darkgreen}{rgb}{.12,.54,.11}
+    \definecolor{myteal}{rgb}{.26, .44, .56}
+    \definecolor{gray}{gray}{0.45}
+    \definecolor{lightgray}{gray}{.95}
+    \definecolor{mediumgray}{gray}{.8}
+    \definecolor{inputbackground}{rgb}{.95, .95, .85}
+    \definecolor{outputbackground}{rgb}{.95, .95, .95}
+    \definecolor{traceback}{rgb}{1, .95, .95}
+    % ansi colors
+    \definecolor{red}{rgb}{.6,0,0}
+    \definecolor{green}{rgb}{0,.65,0}
+    \definecolor{brown}{rgb}{0.6,0.6,0}
+    \definecolor{blue}{rgb}{0,.145,.698}
+    \definecolor{purple}{rgb}{.698,.145,.698}
+    \definecolor{cyan}{rgb}{0,.698,.698}
+    \definecolor{lightgray}{gray}{0.5}
+    
+    % bright ansi colors
+    \definecolor{darkgray}{gray}{0.25}
+    \definecolor{lightred}{rgb}{1.0,0.39,0.28}
+    \definecolor{lightgreen}{rgb}{0.48,0.99,0.0}
+    \definecolor{lightblue}{rgb}{0.53,0.81,0.92}
+    \definecolor{lightpurple}{rgb}{0.87,0.63,0.87}
+    \definecolor{lightcyan}{rgb}{0.5,1.0,0.83}
+    
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Titanic\_Survival\_Exploration}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=blue,
+      linkcolor=darkorange,
+      citecolor=darkgreen,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Machine Learning Engineer
+Nanodegree}\label{machine-learning-engineer-nanodegree}
+
+\subsection{Introduction and
+Foundations}\label{introduction-and-foundations}
+
+\subsection{Project: Titanic Survival
+Exploration}\label{project-titanic-survival-exploration}
+
+In 1912, the ship RMS Titanic struck an iceberg on its maiden voyage and
+sank, resulting in the deaths of most of its passengers and crew. In
+this introductory project, we will explore a subset of the RMS Titanic
+passenger manifest to determine which features best predict whether
+someone survived or did not survive.
+
+    \section{Getting Started}\label{getting-started}
+
+To begin working with the RMS Titanic passenger data, we'll first need
+to \texttt{import} the functionality we need, and load our data into a
+\texttt{pandas} DataFrame.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k+kn}{as} \PY{n+nn}{pd}
+        
+        \PY{c+c1}{\PYZsh{} RMS Titanic data visualization code }
+        \PY{k+kn}{from} \PY{n+nn}{titanic\PYZus{}visualizations} \PY{k+kn}{import} \PY{n}{survival\PYZus{}stats}
+        \PY{k+kn}{from} \PY{n+nn}{IPython.display} \PY{k+kn}{import} \PY{n}{display}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        
+        \PY{c+c1}{\PYZsh{} Load the dataset}
+        \PY{n}{in\PYZus{}file} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{titanic\PYZus{}data.csv}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{full\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{in\PYZus{}file}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Print the first few entries of the RMS Titanic data}
+        \PY{n}{display}\PY{p}{(}\PY{n}{full\PYZus{}data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    
+    \begin{verbatim}
+   PassengerId  Survived  Pclass  \
+0            1         0       3   
+1            2         1       1   
+2            3         1       3   
+3            4         1       1   
+4            5         0       3   
+
+                                                Name     Sex   Age  SibSp  \
+0                            Braund, Mr. Owen Harris    male  22.0      1   
+1  Cumings, Mrs. John Bradley (Florence Briggs Th...  female  38.0      1   
+2                             Heikkinen, Miss. Laina  female  26.0      0   
+3       Futrelle, Mrs. Jacques Heath (Lily May Peel)  female  35.0      1   
+4                           Allen, Mr. William Henry    male  35.0      0   
+
+   Parch            Ticket     Fare Cabin Embarked  
+0      0         A/5 21171   7.2500   NaN        S  
+1      0          PC 17599  71.2833   C85        C  
+2      0  STON/O2. 3101282   7.9250   NaN        S  
+3      0            113803  53.1000  C123        S  
+4      0            373450   8.0500   NaN        S  
+    \end{verbatim}
+
+    
+    From a sample of the RMS Titanic data, we can see the various features
+present for each passenger on the ship: - \textbf{Survived}: Outcome of
+survival (0 = No; 1 = Yes) - \textbf{Pclass}: Socio-economic class (1 =
+Upper class; 2 = Middle class; 3 = Lower class) - \textbf{Name}: Name of
+passenger - \textbf{Sex}: Sex of the passenger - \textbf{Age}: Age of
+the passenger (Some entries contain \texttt{NaN}) - \textbf{SibSp}:
+Number of siblings and spouses of the passenger aboard - \textbf{Parch}:
+Number of parents and children of the passenger aboard -
+\textbf{Ticket}: Ticket number of the passenger - \textbf{Fare}: Fare
+paid by the passenger - \textbf{Cabin} Cabin number of the passenger
+(Some entries contain \texttt{NaN}) - \textbf{Embarked}: Port of
+embarkation of the passenger (C = Cherbourg; Q = Queenstown; S =
+Southampton)
+
+Since we're interested in the outcome of survival for each passenger or
+crew member, we can remove the \textbf{Survived} feature from this
+dataset and store it as its own separate variable \texttt{outcomes}. We
+will use these outcomes as our prediction targets.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} Store the \PYZsq{}Survived\PYZsq{} feature in a new variable and remove it from the dataset}
+        \PY{n}{outcomes} \PY{o}{=} \PY{n}{full\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Survived}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{data} \PY{o}{=} \PY{n}{full\PYZus{}data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Survived}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Show the new dataset with \PYZsq{}Survived\PYZsq{} removed}
+        \PY{n}{display}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    
+    \begin{verbatim}
+   PassengerId  Pclass                                               Name  \
+0            1       3                            Braund, Mr. Owen Harris   
+1            2       1  Cumings, Mrs. John Bradley (Florence Briggs Th...   
+2            3       3                             Heikkinen, Miss. Laina   
+3            4       1       Futrelle, Mrs. Jacques Heath (Lily May Peel)   
+4            5       3                           Allen, Mr. William Henry   
+
+      Sex   Age  SibSp  Parch            Ticket     Fare Cabin Embarked  
+0    male  22.0      1      0         A/5 21171   7.2500   NaN        S  
+1  female  38.0      1      0          PC 17599  71.2833   C85        C  
+2  female  26.0      0      0  STON/O2. 3101282   7.9250   NaN        S  
+3  female  35.0      1      0            113803  53.1000  C123        S  
+4    male  35.0      0      0            373450   8.0500   NaN        S  
+    \end{verbatim}
+
+    
+    The very same sample of the RMS Titanic data now shows the
+\textbf{Survived} feature removed from the DataFrame. Note that
+\texttt{data} (the passenger data) and \texttt{outcomes} (the outcomes
+of survival) are now \emph{paired}. That means for any passenger
+\texttt{data.loc{[}i{]}}, they have the survival outcome
+\texttt{outcome{[}i{]}}.
+
+To measure the performance of our predictions, we need a metric to score
+our predictions against the true outcomes of survival. Since we are
+interested in how \emph{accurate} our predictions are, we will calculate
+the proportion of passengers where our prediction of their survival is
+correct.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k}{def} \PY{n+nf}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{truth}\PY{p}{,} \PY{n}{pred}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{} Returns accuracy score for input truth and predictions. \PYZdq{}\PYZdq{}\PYZdq{}}
+            
+            \PY{c+c1}{\PYZsh{} Ensure that the number of predictions matches number of outcomes}
+            \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{truth}\PY{p}{)} \PY{o}{==} \PY{n+nb}{len}\PY{p}{(}\PY{n}{pred}\PY{p}{)}\PY{p}{:} 
+                
+                \PY{c+c1}{\PYZsh{} Calculate and return the accuracy as a percent}
+                \PY{k}{return} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Predictions have an accuracy of \PYZob{}:.2f\PYZcb{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{.}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{p}{(}\PY{n}{truth} \PY{o}{==} \PY{n}{pred}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}
+            
+            \PY{k}{else}\PY{p}{:}
+                \PY{k}{return} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of predictions does not match number of outcomes!}\PY{l+s+s2}{\PYZdq{}}
+            
+        \PY{c+c1}{\PYZsh{} Test the \PYZsq{}accuracy\PYZus{}score\PYZsq{} function}
+        \PY{n}{predictions} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{dtype} \PY{o}{=} \PY{n+nb}{int}\PY{p}{)}\PY{p}{)}
+        \PY{k}{print} \PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{outcomes}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,} \PY{n}{predictions}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Predictions have an accuracy of 60.00\%.
+    \end{Verbatim}
+
+    \section{Making Predictions}\label{making-predictions}
+
+If we were told to make a prediction about any passenger aboard the RMS
+Titanic who we did not know anything about, then the best prediction we
+could make would be that they did not survive. This is because we can
+assume that a majority of the passengers as a whole did not survive the
+ship sinking. The function below will always predict that a passenger
+did not survive.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{def} \PY{n+nf}{predictions\PYZus{}0}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{} Model with no features. Always predicts a passenger did not survive. \PYZdq{}\PYZdq{}\PYZdq{}}
+        
+            \PY{n}{predictions} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{k}{for} \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{passenger} \PY{o+ow}{in} \PY{n}{data}\PY{o}{.}\PY{n}{iterrows}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                
+                \PY{c+c1}{\PYZsh{} Predict the survival of \PYZsq{}passenger\PYZsq{}}
+                \PY{n}{predictions}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} Return our predictions}
+            \PY{k}{return} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{predictions}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Make the predictions}
+        \PY{n}{predictions} \PY{o}{=} \PY{n}{predictions\PYZus{}0}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+\end{Verbatim}
+
+    \subsubsection{Question 1}\label{question-1}
+
+\emph{Using the RMS Titanic data, how accurate would a prediction be
+that none of the passengers survived?}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k}{print} \PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{outcomes}\PY{p}{,} \PY{n}{predictions}\PY{p}{)}
+        \PY{k}{print} \PY{p}{(}\PY{n}{outcomes} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{} count of passengers who did not survive}
+        \PY{k}{print} \PY{n}{outcomes}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}       \PY{c+c1}{\PYZsh{} count of all passengers in table}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Predictions have an accuracy of 61.62\%.
+549
+891
+    \end{Verbatim}
+
+    \textbf{Answer:} Using the naive prediction that every passenger will
+not survive, the accuracy obtained is \textbf{61.62\%}. This indicates
+that 61.62\% of passengers did not survive, as confirmed by the
+calculations above.
+
+    Let's take a look at whether the feature \textbf{Sex} has any indication
+of survival rates among passengers using the \texttt{survival\_stats}
+function. This function is defined in the
+\texttt{titanic\_visualizations.py} Python script included with this
+project. The first two parameters passed to the function are the RMS
+Titanic data and passenger survival outcomes, respectively. The third
+parameter indicates which feature we want to plot survival statistics
+across.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{survival\PYZus{}stats}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{outcomes}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Titanic_Survival_Exploration_files/Titanic_Survival_Exploration_13_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Examining the survival statistics, a large majority of males did not
+survive the ship sinking. However, a majority of females \emph{did}
+survive the ship sinking. Let's build on our previous prediction: If a
+passenger was female, then we will predict that they survived.
+Otherwise, we will predict the passenger did not survive.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{def} \PY{n+nf}{predictions\PYZus{}1}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{} Model with one feature: }
+        \PY{l+s+sd}{            \PYZhy{} Predict a passenger survived if they are female. \PYZdq{}\PYZdq{}\PYZdq{}}
+            
+            \PY{n}{predictions} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{k}{for} \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{passenger} \PY{o+ow}{in} \PY{n}{data}\PY{o}{.}\PY{n}{iterrows}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                
+                \PY{c+c1}{\PYZsh{} Remove the \PYZsq{}pass\PYZsq{} statement below }
+                \PY{c+c1}{\PYZsh{} and write your prediction conditions here}
+                \PY{k}{if}\PY{p}{(}\PY{n}{passenger}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{male}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{predictions}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n}{predictions}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} Return our predictions}
+            \PY{k}{return} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{predictions}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Make the predictions}
+        \PY{n}{predictions} \PY{o}{=} \PY{n}{predictions\PYZus{}1}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+\end{Verbatim}
+
+    \subsubsection{Question 2}\label{question-2}
+
+\emph{How accurate would a prediction be that all female passengers
+survived and the remaining passengers did not survive?}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k}{print} \PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{outcomes}\PY{p}{,} \PY{n}{predictions}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Predictions have an accuracy of 78.68\%.
+    \end{Verbatim}
+
+    \textbf{Answer}: The new accuracy with the modified prediction algorithm
+is \textbf{78.68}. This indicates that by guessing based solely on
+gender will predict the right outcome 78.68\% of the time. This is a
+27.7\% improvement in accuracy over our previous rudimentary prediction
+algorithm!
+
+    Using just the \textbf{Sex} feature for each passenger, we are able to
+increase the accuracy of our predictions by a significant margin. Now,
+let's consider using an additional feature to see if we can further
+improve our predictions. Consider, for example, all of the male
+passengers aboard the RMS Titanic: Can we find a subset of those
+passengers that had a higher rate of survival? Let's start by looking at
+the \textbf{Age} of each male, by again using the
+\texttt{survival\_stats} function. This time, we'll use a fourth
+parameter to filter out the data so that only passengers with the
+\textbf{Sex} `male' will be included.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{survival\PYZus{}stats}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{outcomes}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Sex == }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{male}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Titanic_Survival_Exploration_files/Titanic_Survival_Exploration_20_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Examining the survival statistics, the majority of males younger then 10
+survived the ship sinking, whereas most males age 10 or older \emph{did
+not survive} the ship sinking. Let's continue to build on our previous
+prediction: If a passenger was female, then we will predict they
+survive. If a passenger was male and younger than 10, then we will also
+predict they survive. Otherwise, we will predict they do not survive.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k}{def} \PY{n+nf}{predictions\PYZus{}2}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{} Model with two features: }
+         \PY{l+s+sd}{            \PYZhy{} Predict a passenger survived if they are female.}
+         \PY{l+s+sd}{            \PYZhy{} Predict a passenger survived if they are male and younger than 10. \PYZdq{}\PYZdq{}\PYZdq{}}
+             
+             \PY{n}{predictions} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{passenger} \PY{o+ow}{in} \PY{n}{data}\PY{o}{.}\PY{n}{iterrows}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                 
+                 \PY{c+c1}{\PYZsh{} Remove the \PYZsq{}pass\PYZsq{} statement below }
+                 \PY{c+c1}{\PYZsh{} and write your prediction conditions here}
+                 
+                 \PY{c+c1}{\PYZsh{} if passenger is a female OR male aged younger than 10}
+                 \PY{k}{if}\PY{p}{(}\PY{n}{passenger}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{female}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{or} \PY{p}{(}\PY{n}{passenger}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{male}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{and} \PY{n}{passenger}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{predictions}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{predictions}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Return our predictions}
+             \PY{k}{return} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{predictions}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Make the predictions}
+         \PY{n}{predictions} \PY{o}{=} \PY{n}{predictions\PYZus{}2}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+\end{Verbatim}
+
+    \subsubsection{Question 3}\label{question-3}
+
+\emph{How accurate would a prediction be that all female passengers and
+all male passengers younger than 10 survived?}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k}{print} \PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{outcomes}\PY{p}{,} \PY{n}{predictions}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Predictions have an accuracy of 79.35\%.
+    \end{Verbatim}
+
+    \textbf{Answer}: With the third iteration of our algorithm, the
+prediction accuracy reached \textbf{79.35\%}, which is a 0.85\% increase
+from our previous model.
+
+    Adding the feature \textbf{Age} as a condition in conjunction with
+\textbf{Sex} improves the accuracy by a small margin more than with
+simply using the feature \textbf{Sex} alone. Now we will find a series
+of features and conditions to split the data on to obtain an outcome
+prediction accuracy of at least 80\%.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{survival\PYZus{}stats}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{outcomes}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Parch}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Pclass == 3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Age \PYZgt{} 40}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Age \PYZlt{} 50}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Titanic_Survival_Exploration_files/Titanic_Survival_Exploration_27_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{k}{def} \PY{n+nf}{predictions\PYZus{}3}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{} Model with multiple features. Makes a prediction with an accuracy of at least 80\PYZpc{}. \PYZdq{}\PYZdq{}\PYZdq{}}
+             
+             \PY{n}{predictions} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{passenger} \PY{o+ow}{in} \PY{n}{data}\PY{o}{.}\PY{n}{iterrows}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                 
+                 \PY{n}{is\PYZus{}third\PYZus{}class\PYZus{}male} \PY{o}{=} \PY{n}{passenger}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pclass}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{3} \PY{o+ow}{and} \PY{n}{passenger}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{male}\PY{l+s+s1}{\PYZsq{}}
+                 \PY{n}{is\PYZus{}female} \PY{o}{=} \PY{n}{passenger}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{female}\PY{l+s+s1}{\PYZsq{}}
+                 \PY{n}{is\PYZus{}young\PYZus{}male} \PY{o}{=} \PY{n}{passenger}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{male}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{and} \PY{n}{passenger}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mi}{10}
+                 \PY{n}{is\PYZus{}middle\PYZus{}age\PYZus{}poor\PYZus{}no\PYZus{}family} \PY{o}{=} \PY{n}{passenger}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Parch}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{passenger}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pclass}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{3} \PY{o+ow}{and} \PY{n}{passenger}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{40} \PY{o+ow}{and} \PY{n}{passenger} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mi}{50}
+                 
+                 \PY{c+c1}{\PYZsh{} Remove the \PYZsq{}pass\PYZsq{} statement below }
+                 \PY{c+c1}{\PYZsh{} and write your prediction conditions here}
+                 \PY{k}{if}\PY{p}{(}\PY{o+ow}{not} \PY{n}{is\PYZus{}third\PYZus{}class\PYZus{}male} \PY{o+ow}{and} \PY{p}{(}\PY{n}{is\PYZus{}female} \PY{o+ow}{or} \PY{n}{is\PYZus{}young\PYZus{}male}\PY{p}{)} \PY{o+ow}{and} \PY{o+ow}{not} \PY{n}{is\PYZus{}middle\PYZus{}age\PYZus{}poor\PYZus{}no\PYZus{}family}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{predictions}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{predictions}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Return our predictions}
+             \PY{k}{return} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{predictions}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Make the predictions}
+         \PY{n}{predictions} \PY{o}{=} \PY{n}{predictions\PYZus{}3}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+\end{Verbatim}
+
+    \subsubsection{Question 4}\label{question-4}
+
+\emph{Describe the steps taken to implement the final prediction model
+so that it got an accuracy of at least 80\%.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{k}{print} \PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{outcomes}\PY{p}{,} \PY{n}{predictions}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Predictions have an accuracy of 80.13\%.
+    \end{Verbatim}
+
+    \textbf{Answer}: To implement the final prediction model so that it had
+an accuracy of 80.13\%, I first looked at the relationship between
+survival rate and passenger class. As expected, poorer passengers were
+more likely to not survive than upper-class passengers. However, I
+investigated further and realized that this was only really true for
+males, and that females did not seem to be affected by class. This led
+me to add \texttt{is\_third\_class\_male} as a parameter to the
+algorithm, which improved the accuracy to 79.91\%. The next step I made
+was to look at siblings. I found that those in the third class with no
+siblings were more likely to perish than those with siblings. I added
+this to the algorithm, but this actually \emph{decreased} my accuracy.
+Lastly, I looked at a very specific criterion, which included number of
+parents/children, age, and passenger class. Initially, I did not
+consider age, and found that passengers without parents/children onboard
+and in the third class faced higher risk of death. I then looked at age
+as a parameter, and realized the likelihood of death increased for
+middle-aged men, around 40 - 50 years old. This led me to my final
+parameter, \texttt{is\_middle\_age\_poor\_no\_family}, which increased
+the accuracy to \textbf{80.13\%}.
+
+    \section{Conclusion}\label{conclusion}
+
+We now have an algorithm for predicting whether or not a person survived
+the Titanic disaster, based on their features. This has been a manual
+implementation of a simple machine learning model, the \emph{decision
+tree}. In a decision tree, we split the data into smaller groups, one
+feature at a time. Each of these splits will result in groups that are
+more homogeneous than the original group, so that our predictions become
+more accurate. The advantage of having a computer do things for us is
+that it will be more exhaustive and more precise than our manual
+exploration above.
+\href{http://www.r2d3.us/visual-intro-to-machine-learning-part-1/}{This
+link} provides another introduction into machine learning using a
+decision tree.
+
+A decision tree is just one of many algorithms that fall into the
+category of \emph{supervised learning}. In supervised learning, we
+concern ourselves with using features of data to predict or model things
+with objective outcome labels. That is, each of our datapoints has a
+true outcome value, whether that be a category label like survival in
+the Titanic dataset, or a continuous value like predicting the price of
+a house.
+
+\subsubsection{Question 5}\label{question-5}
+
+\emph{What are other examples of where supervised learning can be
+applied?}
+
+    \textbf{Answer}: Supervised learning can be used to predict a number of
+devastating events in an effort to prevent them from happening, like the
+Titanic example. Another example is that of a stock market crash, or
+economic depression. A variety of parameters can be analyzed, such as
+GDP, interest rates, consumer satisfaction, inflation rates, and so on.
+These may or may not explain the impending crash, and machine learning
+(more specifically supervised learning) can be used to accurately
+predict the event well before it happens.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
